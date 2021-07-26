@@ -15,7 +15,8 @@ export class MenuComponent implements OnInit {
             title: '公共组件使用说明',
             icon: 'form',
             child: [
-                { title: '表单组件使用', icon: 'align-center' }
+                { title: '表单组件使用' },
+                { title: '表格组件使用' }
             ]
         },
         {

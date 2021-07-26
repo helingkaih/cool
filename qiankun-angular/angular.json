@@ -43,7 +43,7 @@
                         ],
                         "styles": [
                             "src/styles.scss",
-                            "src/assets/mainScss.scss",
+                            "src/style/mainScss.scss",
                             "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
                         ],
                         "scripts": []
