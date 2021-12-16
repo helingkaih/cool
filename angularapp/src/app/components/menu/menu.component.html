@@ -1,0 +1,9 @@
+<ul nz-menu nzMode="inline" class="menu-position">
+    <li *ngFor="let item of menuList" nz-submenu [nzTitle]="item.title" [nzIcon]="item.icon">
+        <ul *ngIf="item.child">
+            <li *ngFor="let aChild of item.child" nz-menu-item>
+                <a [routerLink]="aChild.url">{{aChild.title}}</a>
+            </li>
+        </ul>
+    </li>
+</ul>

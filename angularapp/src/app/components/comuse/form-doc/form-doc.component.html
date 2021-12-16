@@ -1,0 +1,71 @@
+<div class="display-flex">
+    <div class="center-text">
+        <p class="title-1">表单组件使用说明</p>
+
+        <!-- 什么是表单组件 -->
+        <p class="title-2" id="form-doc-what">什么是表单组件</p>
+        <p class="normal-text">
+            <a href="https://angular.cn/guide/forms-overview" target="view_window">点击查看官方说明
+                <i nz-icon nzType="aim" nzTheme="outline"></i>
+            </a>
+        </p>
+        <p class="normal-text">用表单处理用户输入是许多常见应用的基础功能。 应用通过表单来让用户登录、修改个人档案、输入敏感信息以及执行各种数据输入任务。</p>
+        <p class="normal-text">系统的表单三要素：<code class="stress-normal">FormData</code>、<code
+                class="stress-normal">FormGroup</code>、<code class="stress-normal">FormOrder</code></p>
+
+        <!-- 如何使用 -->
+        <p class="title-2" id="form-doc-use">系统中是怎么使用表单组件的</p>
+        <ul class="normal-ul">
+            <li>首先从后端获取到表单数据 (大部分是后端传来,少数是前端组的表单数据) 。</li>
+            <li>传来的表单数据不能直接使用 (点击查看数据说明) ,需要使用指定的 Service 处理一遍。</li>
+            <li>处理完后的表单数据可以使用，为了验证和提交数据方便，我们还会将处理完的数据使用指定方法组成 <code class="stress-normal">FormGroup</code></li>
+        </ul>
+        <code-view [codeValue]="toForm" codeType="TypeScript" codeId="form-doc-toForm"></code-view>
+
+        <!-- 为什么会有个新的 FormService-->
+        <p class="title-2" id="form-doc-whyNew">为什么会有个新的 FormService</p>
+        <p class="normal-text">
+            <a routerLink="../formService">点击查看新 FormService 说明
+                <i nz-icon nzType="aim" nzTheme="outline"></i>
+            </a>
+        </p>
+        <ul class="normal-ul">
+            <li>( 以下新 FormService 简称 新方法，旧的简称 旧方法 )。</li>
+            <li>旧方法存在时间久，修改过的人多，不断会有新的需求导致要修改这个方法，以至于现在旧方法代码很冗余，处理很繁杂，性能也就差了。</li>
+            <li>由于旧方法的性能差、可读性差、可维护性差等几方面的因素，诞生了个新方法。</li>
+            <li>新方法代码精简，性能高，只处理必须要的数据、可拓展性高，目前正在慢慢适配整个系统。</li>
+            <li>为了保证新方法不会发展成旧方法那样，如果需要修改到新方法时，必须找相关负责人协商。</li>
+        </ul>
+
+        <!-- 什么是 FormGroup -->
+        <p class="title-2" id="form-doc-whatFormGroup">什么是 FormGroup</p>
+        <p class="normal-text">
+            <a href="https://angular.cn/guide/forms-overview" target="view_window">点击查看官方说明
+                <i nz-icon nzType="aim" nzTheme="outline"></i>
+            </a>
+        </p>
+        <p class="normal-text">
+            <code class="stress-normal">FormGroup</code> 把每个子 <code class="stress-normal">FormControl</code> 的值聚合进一个对象，
+            它的 <code class="stress-normal">key</code> 是每个控件的名字。 它通过归集其子控件的状态值来计算出自己的状态。
+            比如，如果组中的任何一个控件是无效的，那么整个组就是无效的，我们提交表单数据的时候会使用其 <code class="stress-normal">value</code> 属性。
+            总的来说 <code class="stress-normal">FormGroup</code> 就是表单数据的总控中心，可以实现非常多的操作。
+        </p>
+
+        <!-- 什么是 FormOrder -->
+        <p class="title-2" id="form-doc-whatFormOrder">什么是 FormOrder</p>
+        <p class="normal-text"><code class="stress-normal">FormOrder</code> 顾名思义，就是表单的顺序，用来在页面上按顺序展示表单字段</p>
+
+        <!-- FormData 的参数说明 -->
+        <p class="title-2" id="form-doc-FormDataParams">FormData 的参数说明</p>
+        <p class="normal-text">以下列举了一些后端传来的 <code class="stress-normal">FormData</code> 部分参数说明 </p>
+        <info-table [tableData]="formDataTable">
+        </info-table>
+        <!-- FormGroup 的参数说明 -->
+        <!-- 目前系统内都有哪些表单元素 -->
+
+    </div>
+
+    <div>
+        <app-anchor [linkList]="linkList"></app-anchor>
+    </div>
+</div>

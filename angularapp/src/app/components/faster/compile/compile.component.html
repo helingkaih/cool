@@ -1,0 +1,43 @@
+<div class="display-flex">
+    <div class="center-text">
+        <p class="title-1">前端编译和构建提速</p>
+
+        <!-- 为什么前端编译和构建会慢 -->
+        <p class="title-2" id="faster-compile-why">为什么前端编译和构建会慢</p>
+        <ul class="normal-ul">
+            <li>很基础的一个原因大家都能想到，那就是代码量大了，文件数量多体积大。随着业务的发展，这个问题是不可避免的，而且也没有太多的优化手段，基本就是代码优化了。</li>
+            <li>Angular 的默认配置，编译的时候也会使用 AOT 的一些功能编译。</li>
+            <li>代码架构不合理，模块区分的不合理</li>
+        </ul>
+        <p class="normal-text">这里我们着重说明一下如何优化第二点</p>
+
+        <!-- 配置修改 -->
+        <p class="title-2" id="faster-compile-setting">配置修改</p>
+        <p class="normal-text">
+            以下修改都在 <code class="stress-normal">angular.json</code> 文件中。
+            <code class="stress-normal">进到 projects.项目名.architect.build.configurations 中添加一个 development</code>。
+        </p>
+        <code-view [codeValue]="addDevelopment" codeType="TypeScript" codeId="faster-compile-addDevelopment">
+        </code-view>
+        <p class="normal-text">
+            <code class="stress-normal">projects.otrsnew.architect.serve.configurations 中添加</code>。
+        </p>
+        <code-view [codeValue]="addConfig" codeType="TypeScript" codeId="faster-compile-addConfig"></code-view>
+        <p class="normal-text">
+            <code class="stress-normal">projects.otrsnew.architect.serve 中添加</code>。
+        </p>
+        <code-view [codeValue]="addServe" codeType="TypeScript" codeId="faster-compile-addServe"></code-view>
+        <p class="normal-text">
+            这样一来，通过禁用一些配置项，即可提高编译速度，需要注意，尽管现在编译已经做了优化，如果单模块中还是有大量的代码，编译速度依然还是会慢一些，但还是会比没改配置之前快。
+        </p>
+
+        <!-- 配置参数说明 -->
+        <p class="title-2" id="faster-compile-settingExplain">配置参数说明</p>
+        <code-view [codeValue]="settingExplain" codeType="TypeScript" codeId="faster-compile-settingEx">
+        </code-view>
+    </div>
+
+    <div>
+        <app-anchor [linkList]="linkList"></app-anchor>
+    </div>
+</div>

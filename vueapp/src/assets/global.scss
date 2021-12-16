@@ -1,0 +1,95 @@
+.vh-100{
+    height:100vh;
+}
+
+/* 代码块 */
+pre code.hljs {
+    padding: unset !important;
+}
+.highlight{
+    code{
+    padding:unset;
+    font-size: 15px;
+    font-family: sans-serif;
+    border-radius: 8px;
+    }
+    .hljs-title{
+        color: yellow;
+    }
+}
+
+/* 布局相关 */
+.main-normal-box{
+    background: white;
+    padding: 20px;
+    border-radius: 4px;
+    .doc-main{
+        width: 85%;
+        padding: 0px 15px;
+    }
+}
+
+.flex-start{
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* 一级标题 */
+.title-1{
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    color: #303133;
+}
+
+
+/* 二级标题 */
+.title-2{
+    font-size: 22px;
+    font-weight: 500;
+    color: #303133;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+.text-normal{
+    font-size: 16px;
+    line-height: 2.4rem;
+    color: #444;
+    &::before{
+        content: '\00A0\00A0\00A0\00A0'
+    }
+}
+.text-bold{
+    font-size: 16px;
+    line-height: 2.4rem;
+    color: #444;
+    font-weight: bold;
+    &::before{
+        content: '\00A0\00A0\00A0\00A0'
+    }
+}
+
+.text-info{
+    font-size: 16px;
+    line-height: 2.4rem;
+    color:#3740d6;
+    &::before{
+        content: '\00A0\00A0\00A0\00A0'
+    }
+}
+
+// 普通ul
+.normal-ul{
+    li{
+        font-size: 16px;
+        color: #444;
+        line-height: 2.4rem;
+    }
+}
+
+.flex-between{
+    display: flex;
+    justify-content: space-between;
+}

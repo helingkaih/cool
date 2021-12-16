@@ -1,0 +1,7 @@
+<nz-anchor>
+    <nz-link *ngFor="let item of linkList" [nzHref]="'#'+item.href" [nzTitle]="item.title">
+        <ng-container *ngIf="item.child">
+            <nz-link *ngFor="let child of item.child" [nzHref]="'#'+child.href" [nzTitle]="child.title"></nz-link>
+        </ng-container>
+    </nz-link>
+</nz-anchor>

@@ -1,0 +1,95 @@
+<div class="display-flex">
+    <div class="center-text">
+        <p class="title-1">虚拟滚动使用说明</p>
+
+        <!-- 什么是虚拟滚动 -->
+        <p class="title-2" id="virtual-what">什么是虚拟滚动</p>
+        <p class="normal-text">
+            在前端的业务开发过程中，难免会碰见需要渲染大量数据的场景，一次性渲染这么多数据肯定会耗费大量的时间甚至卡死，这个时候有个最常用的解决方案，那就是分页。如果不想分页，需求就是要一页显示完数据呢，那么就需要用到虚拟滚动技术了，虚拟滚动的核心思想也是前端渲染优化的主要手段，<b>只渲染需要的数据，其他数据按需加载</b>。
+        </p>
+
+        <!-- 效果演示 -->
+        <p class="title-2" id="virtual-demo">效果演示</p>
+        <p class="normal-text">
+            我们现在通过对比比较一下使用虚拟滚动和不使用的区别，以下两个例子渲染的是相同的数据
+        </p>
+
+        <button nz-button nzType="primary" (click)="noVirtual=true">展示不使用虚拟滚动</button>
+
+        <button nz-button nzType="primary" (click)="useVirtual=true;initSetting()" class="ml-16">展示使用虚拟滚动</button>
+        <p class="normal-text">
+            通过对比，可以发现，不使用虚拟滚动的列表无论是打开还是关闭，操作起来非常的卡，使用 <code class="stress-normal">F12</code> 工具查看 <code
+                class="stress-normal">Dom</code> ，可以看到所有的数据全部渲染出来了，这对于页面性能来说，无疑是一场噩梦。
+            反观虚拟滚动列表，页面瞬间打开，没有任何的卡顿，滚动条可以正常滚动浏览数据，没有数据显示错误或者不显示的情况，最关键的是，通过 <code class="stress-normal">F12</code> 工具查看
+            <code class="stress-normal">Dom</code> ，可以看到，仅仅只有几个正在使用的 <code class="stress-normal">Dom</code> 渲染出来了。
+        </p>
+
+        <!-- 原理分析 -->
+        <p class="title-2" id="virtual-how">原理分析</p>
+        <p class="normal-text">
+            其核心思想我们上文已经说过了，<b>只渲染需要的数据，其他数据按需加载</b>，那么如何做到按需加载呢？
+        </p>
+        <ul class="normal-ul">
+            <li>首选，我们可以通过一些手段，得到容器高度、每一项内容高度，继而算出当前容器能看见的最多有多少条数据</li>
+            <li>我们还可以计算出，所有数据的总高度，有了总高度我们就可以设置容器的高度，保证滚动条的正常显示</li>
+            <li>监听滚动条的滚动事件，结合当前已知的数据，计算出即将出现和消失的数据的 <code class="stress-normal">index</code> 并修改已显示的数据</li>
+            <li>最初渲染的几个 <code class="stress-normal">Dom</code> 节点数量不变，我们之后只是修改相关节点的内容属性，不会触发重排只有重绘</li>
+        </ul>
+
+        <!-- 代码讲解 -->
+        <p class="title-2" id="virtual-code">代码讲解</p>
+        <p class="normal-text">
+            虚拟滚动的实现方式有很多，网上也有很多例子，这里讲解一个比较简单的方法
+        </p>
+        <ul class="normal-ul">
+            <li>首选需要做一些基础的配置，总高度、行高、可视数目、监听事件等等</li>
+            <code-view [codeValue]="initSettingCode" codeType="TypeScript" codeId="virtual-initSetting"></code-view>
+            <li>
+                之后，我们渲染整个虚拟滚动列表容器，从代码中可以看出，主要是容器总高度和首屏数据处理
+            </li>
+            <code-view [codeValue]="initDataCode" codeType="TypeScript" codeId="virtual-initData"></code-view>
+            <li>
+                监听滚动事件这里没什么好说的，通过一些代码判断处理之后直接进入 <code class="stress-normal">Diff</code>
+            </li>
+            <code-view [codeValue]="scrollEventCode" codeType="TypeScript" codeId="virtual-scrollEvent"></code-view>
+            <li>
+                最后，就是最关键的一步， <code class="stress-normal">Diff & Render</code>
+                ，在这一步中，将会通过计算比较得出滚动条滚动方向，以及即将被隐藏的数据和出现的数据，我们还会拿到新出现的数据的 <code class="stress-normal">index</code> ，在
+                <code class="stress-normal">Render</code> 中用这个 <code class="stress-normal">index</code> 获取新数据以及更新 <code
+                    class="stress-normal">Dom</code> 节点，这里的更新只是修改了 <code
+                    class="stress-normal">Dom</code> 节点的一些属性，只会触发重绘。
+                <code-view [codeValue]="diffRenderCode" codeType="TypeScript" codeId="virtual-diffRender"></code-view>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <app-anchor [linkList]="linkList"></app-anchor>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<nz-modal [(nzVisible)]="noVirtual" nzTitle="普通列表" [nzFooter]="null" (nzOnCancel)="noVirtual=false"
+    (nzOnOk)="noVirtual=false">
+    <div class="list">
+        <div *ngFor="let item of data">
+            {{item}}
+        </div>
+    </div>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="useVirtual" nzTitle="虚拟滚动列表" [nzFooter]="null" (nzOnCancel)="useVirtual=false"
+    (nzOnOk)="useVirtual=false">
+    <div id="list" class="list">
+        <ul></ul>
+    </div>
+</nz-modal>

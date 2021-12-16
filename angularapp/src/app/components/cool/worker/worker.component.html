@@ -1,0 +1,41 @@
+<div class="display-flex">
+    <div class="center-text">
+        <p class="title-1">web Worker 使用说明</p>
+        <!-- 什么是 web worker -->
+        <p class="title-2" id="form-worker-what">什么是 web worker</p>
+        <p class="normal-text">在讲解之前，我们还需要了解一个概念，线程;</p>
+        <p class="normal-text">JS 是单线程的工作环境，如果一个 JS 任务中，需要完成极大的数据处理，那么整个 JS 线程将会出现阻塞现象，进而会导致之后的 UI 和 IO
+            停止运行，表现有：浏览器卡死、鼠标键盘操作没反应等，这就是很明显的线程阻塞现象</p>
+        <p class="normal-text">JS 是单线程的但是浏览器是多线程的，也就是说我们可以开辟子线程完成 大量的 JS 处理，这就要用到 web Worker 了</p>
+        <p class="normal-text">web Worker 与主线程之间只有简单的通讯，不会共享任何资源</p>
+
+        <!-- 如何使用 web worker -->
+        <p class="title-2" id="form-worker-use">如何使用 web worker</p>
+        <p class="normal-text">网上有很多的文章可以查到，这里只介绍 angular 官方的
+            <a href="https://angular.cn/guide/web-worker" target="view_window">web Worker
+                <i nz-icon nzType="aim" nzTheme="outline"></i>
+            </a>
+        </p>
+
+        <!-- 效果展示 -->
+        <p class="title-2" id="form-worker-use">效果展示</p>
+        <p class="normal-text">一下两个按钮将分别展示主线程和 Worker 分线程执行相同计算的效果，注意：</p>
+        <ul class="normal-ul">
+            <li>可以打开开发者工具查看日志输出</li>
+            <li>点击主线程计算时，页面将卡死，键鼠输入将没任何反应，如果长时间假死，请刷新页面</li>
+        </ul>
+
+        <button nz-button nzType="primary" (click)="runCompute()">主线程运算</button>
+        <button nz-button nzType="primary" (click)="runWorker()" class="ml-16">worker 运算</button>
+    </div>
+
+    <div>
+        <app-anchor [linkList]="[]"></app-anchor>
+    </div>
+</div>
+
+<!-- 
+    什么是 web Worker
+    如何使用 web Worker
+    举例 没用 worker 和用 worker
+ -->

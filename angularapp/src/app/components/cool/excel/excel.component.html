@@ -1,0 +1,20 @@
+<div class="display-flex">
+    <div class="center-text">
+        <!-- 动态加载js -->
+        <!-- <i ijs [jsList]="jsList" [linkList]="linkList"></i> -->
+        <p>todo:批量批注替换,导入导出批注</p>
+        <button (click)="expotr()">导出</button>
+        <button (click)="xuanqv()">选区</button>
+        <button (click)="suoding()">选择要操作的列</button>
+        <button (click)="pizhu()">选择作为批注的列</button>
+        <input style="font-size:16px;" type="file" (change)="import($event)" />
+        <div style="width: 100%;height: 800px;">
+            <div id="luckysheet" style="margin:0px;padding:0px;width:100%;height:100%;">
+            </div>
+        </div>
+
+    </div>
+    <div>
+        <app-anchor [linkList]="[]"></app-anchor>
+    </div>
+</div>
