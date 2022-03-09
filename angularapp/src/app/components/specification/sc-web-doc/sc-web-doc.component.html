@@ -1,0 +1,63 @@
+<div class="display-flex">
+    <div class="center-text">
+        <p class="title-1">sc-web 规范说明</p>
+        <p class="title-2">目标：清晰、简洁、易懂、可拓展、可复用、高性能</p>
+        <!-- HTML 规范 -->
+        <p class="title-2" id="form-webdoc-HTML">HTML 规范</p>
+        <p class="title-3" id="form-webdoc-HTML-tag">调整好多层嵌套的 <code>HTML</code> 标签的格式，根据情况再选择换行</p>
+        <code-view [codeValue]="HTMLCode1" codeType="HTML" codeId="form-webdoc-HTMLCode1"></code-view>
+
+        <p class="title-3" id="form-webdoc-HTML-notes">合适的注释，合适的间距</p>
+        <code-view [codeValue]="HTMLCode2" codeType="HTML" codeId="form-webdoc-HTMLCode2"></code-view>
+
+        <p class="title-3" id="form-webdoc-HTML-forif">
+            禁止单独一个标签写 <code>for/if</code>，尽量使用 <code class="stress-normal">ng-container</code> 或者直接在目标元素上写
+            <code>for/if</code>
+        </p>
+        <code-view [codeValue]="HTMLCode3" codeType="HTML" codeId="form-webdoc-HTMLCode3"></code-view>
+
+        <!-- TS 规范 -->
+        <p class="title-2" id="form-webdoc-TS">TS 规范</p>
+        <p class="title-3" id="form-webdoc-TS-OnPush">没有特殊情况的话，所有组件都要开启 <code class="stress-normal">OnPush</code> 模式</p>
+        <code-view [codeValue]="TSCode1" codeType="TypeScript" codeId="form-webdoc-TSCode1"></code-view>
+
+        <p class="title-3" id="form-webdoc-TS-fun">除了生命周期，其他所有方法都必须写注释，且方法长度尽量控制在75行以内</p>
+        <code-view [codeValue]="TSCode2" codeType="TypeScript" codeId="form-webdoc-TSCode2"></code-view>
+
+        <p class="title-3">合理的封装复用代码</p>
+        <p class="normal-text">这一点是毋庸置疑的，在同一个功能模块下很大概率会出现相同的逻辑处理现象，这个时候对代码进行合理的封装会提高开发效率和代码的易读性，但需要控制，不能过度封装。</p>
+
+        <!-- css 规范 -->
+        <p class="title-2" id="form-webdoc-Css">Css 规范</p>
+        <p class="title-3" id="form-webdoc-Css-common">部分主要样式需要用系统封装好的,
+            <a href="''" target="view_window">点击查看系统主要样式说明
+                <i nz-icon nzType="aim" nzTheme="outline"></i>
+            </a>
+        </p>
+        <p class="normal-text">
+            为了避免重复定义样式，造成代码冗余混乱，系统规定了部分经常使用的样式，并已经全局注册，直接使用即可。
+        </p>
+        <p class="title-3" id="form-webdoc-Css-important">少用或不用 important </p>
+        <p class="normal-text">
+            <code class="stress-normal">important</code> 属性过于霸道，过多使用的话一旦出问题，那将会是场噩梦，提高了样式的维护难度。
+        </p>
+
+        <p class="title-3">要覆盖子组件的样式时，需要用子代选择器，并且父样式是当前父组件的 </p>
+        <p class="normal-text">可能会有这么一种情况，一个页面使用到了两个相同的子组件，其中一个样式要变，那就得在父组件相应位置增加一个父样式，这样一来就可以单独控制该父样式下子组件的样式了</p>
+        <code-view [codeValue]="CssCode1" codeType="TypeScript" codeId="form-webdoc-CssCode2"></code-view>
+
+        <!-- 组件使用规范 -->
+        <p class="title-2" id="form-doc-what">组件使用规范</p>
+    </div>
+    <div>
+        <app-anchor [linkList]="linkList"></app-anchor>
+    </div>
+</div>
+
+
+<!-- 
+    HTML 规范 (书写格式，备注，循环，if)
+    TS 规范 (变量声明，变更检测，方法格式，循环，if)
+    css 规范(公共css 介绍，如何使用，命名，书写)
+    组件使用规范 form table
+ -->

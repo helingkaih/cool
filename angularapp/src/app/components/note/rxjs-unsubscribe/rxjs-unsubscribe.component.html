@@ -1,0 +1,61 @@
+<div class="display-flex">
+    <div class="center-text">
+        <p class="title-1">取消订阅 Rxjs Observable 的最佳实践</p>
+        <!-- Rxjs Observables的简介 -->
+        <p class="title-2" id="Rxjs-Observable-what">Rxjs Observables的简介</p>
+        <p class="normal-text">
+            Rxjs 是一项前端领域的新兴技术。它在 Angular 的核心 API 中被大量使用了，也随 Angular 水涨船高。经证明它是一个处理异步事件集合的强力工具。
+        </p>
+
+        <!-- 异步编程思想的发展史 -->
+        <p class="title-2" id="Rxjs-Observable-why">异步编程思想的发展史</p>
+        <p class="normal-text">
+            最开始，我们使用简单的回调函数。我们将回调函数作为参数传递给其他函数，当其他函数完成后，回调函数随后被调用。后来，大家更愿意使用 promise 。promise
+            承诺返回单个值来作为其结果或是错误。一旦该返回值被确立，处理程序就会被触发。尘埃落定，继续前行。
+            Observables 需要新的方法来消费传入的值。我们必须订阅 observable 流，每当一个新值被发出，我们的处理器就会被通知。我们无法提前知道会有多少值。甚至，一些流可能是无限的(例如用户单击、
+            websocket
+            信息)。因而我们必须主动控制订阅。在 Angular 应用中，有很多不同的方法来处理 RxJS 订阅这些方法在简洁性、健壮性和易读性方面提供了不同的权衡。
+        </p>
+
+        <!-- .subscribe()方法，致命的内存泄漏 -->
+        <p class="title-2" id="Rxjs-Observable-subscribe">.subscribe()方法，致命的内存泄漏</p>
+        <p class="normal-text">
+            举一个简单的栗子，我们定义一个 <code class="stress-normal">interval</code> ，它是一个无限的冷模式Observable。
+            点击按钮即可创建例子，创建完成后打开控制台可以看到每一秒都输出 interval 字符串，哪怕切换到其他页面，也一直在输出，这就是内存泄漏。
+        </p>
+        <button nz-button nzType="primary" (click)="createIntervalCase()" class="mb-16">创建一个 interval 例子</button>
+        <code-view [codeValue]="intervalCase" codeType="TypeScript" codeId="notes-rxjs-unsubscribe"></code-view>
+        <p class="normal-text">
+            所以，在组件销毁时，要及时清除订阅，防止内存泄漏，点击下面的按钮，即可实现组件销毁时清除订阅功能，切换到其他页面，
+        </p>
+        <nz-switch [(ngModel)]="clear" nzCheckedChildren="开" nzUnCheckedChildren="关"></nz-switch>
+
+        <!-- RxJS 操作符—— takeUnti -->
+        <p class="title-2" id="Rxjs-Observable-takeUnti">RxJS 操作符—— takeUnti</p>
+        <p class="normal-text">
+            <code class="stress-normal">takeUntil</code> 订阅并开始镜像源 Observable 。它还监视另外一个 Observable，即你 提供的 notifier 。如果
+            notifier 发出值或 complete 通知，那么输出 Observable 停止镜像源
+            Observable ，然后完成。通俗点来讲，<code class="stress-normal">takeUntil</code> 控制一个 Observable 并接受一个 Observable
+            ，接受到值就终止控制的 Observable。
+            点击下方按钮，即可创建一个 takeUntil 例子，该例子会创建两个 Observable ，一个是间隔 1s 的 interval ，另一个是 5s 的 timer，这里 interval 是源
+            Observable ，如果没有 takeUntil ，那么在 interval 的作用下每隔 1s 控制台都会有输出，使用 takeUntil 后会在第 5s 接受到 timer 的值，并终止 interval
+            ，所以控制台只会输出 <code class="stress-normal">0 1 2 3</code>
+        </p>
+        <button nz-button nzType="primary" (click)="createTakeUntilCase()" class="mb-16">创建一个 takeUntil 例子</button>
+        <code-view [codeValue]="takeUntilCase" codeType="TypeScript" codeId="notes-rxjs-takeUntilCase"></code-view>
+        <!-- RxJS 操作符—— take -->
+        <p class="title-2" id="Rxjs-Observable-take">RxJS 操作符—— take</p>
+        <p class="normal-text">
+            有些 subscription 只在程序启动的时候发生一次。它们可能启动一些处理或者触发第一个请求来加载初始化数据。
+            在这种场景下，我们可以使用 <code class="stress-normal">RxJS take(1)</code> 操作符，这是个妙招，因为它在第一次执行后自动取消订阅。
+            点击下方按钮，会创建个 interval , 但同时我们给了 take(1) ，所以这个 interval 只会被执行 1 次就取消了。
+        </p>
+        <button nz-button nzType="primary" (click)="createTakeCase()" class="mb-16">创建一个 tabke 例子</button>
+        <code-view [codeValue]="takeCase" codeType="TypeScript" codeId="notes-rxjs-takeCaseCase"></code-view>
+    </div>
+
+    <div>
+        <app-anchor [linkList]="linkList"></app-anchor>
+    </div>
+
+</div>

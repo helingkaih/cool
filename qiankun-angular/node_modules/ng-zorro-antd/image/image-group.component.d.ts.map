@@ -1,0 +1,1 @@
+{"version":3,"file":"image-group.component.d.ts","sources":["image-group.component.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;AACA;;;AACA","sourcesContent":["import { NzImageDirective } from './image.directive';\nexport declare class NzImageGroupComponent {\n    images: NzImageDirective[];\n    addImage(image: NzImageDirective): void;\n}\n"]}

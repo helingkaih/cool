@@ -1,0 +1,30 @@
+.list {
+    width: 100%;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 800px;
+}
+
+.list ul {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    list-style: none;
+    position: relative;
+}
+
+.list ul li {
+    position: relative;
+}
+
+.list .item {
+    background: white;
+    width: 96%;
+    margin-left: 2%;
+    height: 170px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 8px;
+}

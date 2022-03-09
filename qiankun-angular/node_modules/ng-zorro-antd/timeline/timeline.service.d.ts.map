@@ -1,0 +1,1 @@
+{"version":3,"file":"timeline.service.d.ts","sources":["timeline.service.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;AACA;;;AACA","sourcesContent":["import { ReplaySubject } from 'rxjs';\nexport declare class TimelineService {\n    check$: ReplaySubject<unknown>;\n    markForCheck(): void;\n}\n"]}

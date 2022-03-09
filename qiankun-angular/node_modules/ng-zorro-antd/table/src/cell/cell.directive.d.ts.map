@@ -1,0 +1,1 @@
+{"version":3,"file":"cell.directive.d.ts","sources":["cell.directive.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;AACA;;;AACA","sourcesContent":["import { NzTableStyleService } from '../table-style.service';\nexport declare class NzTableCellDirective {\n    isInsideTable: boolean;\n    constructor(nzTableStyleService: NzTableStyleService);\n}\n"]}

@@ -1,7 +1,0 @@
-<ul nz-menu nzMode="inline">
-    <li *ngFor="let item of menuList" nz-submenu [nzTitle]="item.title" [nzIcon]="item.icon">
-        <ul *ngIf="item.child">
-            <li *ngFor="let aChild of item.child" nz-menu-item>{{aChild.title}}</li>
-        </ul>
-    </li>
-</ul>

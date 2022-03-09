@@ -1,0 +1,95 @@
+code, kbd, pre, samp {
+    &.stress-normal{
+        font-size: 1em;
+        font-family: arial;
+    }
+}
+.w-10-p{
+    width: 10%;
+}
+.w-15-p{
+    width: 15%;
+}
+.w-20-p{
+    width: 20%;
+}
+.w-80-p{
+    width: 80%;
+}
+.w-85-p{
+    width: 85%;
+}
+.w-90-p{
+    width: 90%;
+}
+
+.ml-16{
+    margin-left: 16px;
+}
+
+.mb-16{
+    margin-bottom: 16px;
+}
+
+.font-16{
+    font-size: 16px;
+}
+
+.font-18{
+    font-size: 18px;
+}
+
+.center-text{
+    width: 80%;
+    padding-right: 10%;
+}
+
+// 强调字体
+.stress-normal{
+    background-color: hsla(0,0%,85.9%,.5);
+    border-radius: 4px;
+    padding: 4px;
+    font-weight: bold;
+}
+
+
+// 一级标题
+.title-1{
+    font-weight: 500;
+    font-size: 30px;
+    color: black;
+}
+// 二级标题
+.title-2{
+    font-weight: 500;
+    font-size: 24px;
+    color: black;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+// 三级标题
+.title-3{
+    font-weight: 500;
+    font-size: 20px;
+    color: black;
+}
+
+// 普通字体
+.normal-text{
+    font-size: 16px;
+    color: #444;
+    line-height: 2.4rem;
+}
+
+// 普通ul
+.normal-ul{
+    li{
+        font-size: 16px;
+        color: #444;
+        line-height: 2.4rem;
+    }
+}
+
+.display-flex{
+    display: flex;
+}

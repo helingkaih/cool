@@ -1,0 +1,55 @@
+body{
+    margin: 0px;
+}
+p {
+    margin: 0;
+    line-height: 1em;
+}
+// 主应用的样式会影响子应用，这里加个 class 限制影响范围
+.main-style{
+    /* 代码块 */
+    .highlight>code{
+        font-size: 14px;
+        font-family: emoji;
+        border-radius: 8px;
+    }
+
+    /* 一级标题 */
+    .title-1{
+        font-size: 26px;
+        font-weight: bold;
+        text-align: center;
+        color: #303133;
+    }
+
+
+    /* 二级标题 */
+    .title-2{
+        font-size: 22px;
+        font-weight: bold;
+        color: #303133;
+        margin-bottom: 1rem;
+        margin-top: 2rem;
+    }
+
+    .text-normal{
+        font-size: 18px;
+        color: #303133;
+        line-height: 2.4rem;
+    }
+
+    .normal-ul{
+        li{
+            font-size: 16px;
+            color: #444;
+            line-height: 2.4rem;
+        }
+    }
+
+    .center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50% ,-50%);
+    }
+}

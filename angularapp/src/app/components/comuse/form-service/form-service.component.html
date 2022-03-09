@@ -1,0 +1,75 @@
+<div class="display-flex">
+    <div class="center-text">
+        <p class="title-1">新 FormService 使用说明</p>
+
+        <!-- 系统中是怎么使用表单组件的 -->
+        <p class="title-2" id="form-service-use">系统中是怎么使用表单组件的</p>
+        <ul class="normal-ul">
+            <li>首先从后端获取到表单数据 (大部分是后端传来,少数是前端组的表单数据) 。</li>
+            <li>传来的表单数据不能直接使用 (点击查看数据说明) ,需要使用指定的 Service 处理一遍。</li>
+            <li>处理完后的表单数据可以使用，为了验证和提交数据方便，我们还会将处理完的数据使用指定方法组成 <code class="stress-normal">FormGroup</code></li>
+        </ul>
+        <code-view [codeValue]="useForm" codeType="TypeScript" codeId="form-service-useForm"></code-view>
+
+        <!-- 代码说明 -->
+        <p class="title-2" id="form-service-use">方法代码说明</p>
+        <p class="normal-text">经过大量的使用，目前 FormService 最大用处有以下几点：</p>
+        <ul class="normal-ul">
+            <li>处理 <code class="stress-normal">DropDown</code> 、 <code class="stress-normal">TreeSelect</code> 、
+                <code class="stress-normal">TreeCascader</code> 这三类字段的选项值
+            </li>
+            <li>某些字段的默认值格式需要转换，如： <code class="stress-normal">DateTime</code> 、 <code
+                    class="stress-normal">DateRange</code>......</li>
+
+        </ul>
+        <code-view [codeValue]="formServiceCode" codeType="TypeScript" codeId="form-service-code"></code-view>
+        <p class="normal-text">整个方法非常精简，先处理基本数据、之后会通过 <code class="stress-normal">this[item.type]</code> 的判断，判断当前字段的
+            <code class="stress-normal">type</code> 处理方法是否存在，存在的话直接使用，不存在的话就说明当前字段不需要任何特殊处理，直接结束。
+        </p>
+        <p class="normal-text">举个栗子：这是字段 <code class="stress-normal">type</code> 为 <code
+                class="stress-normal">DropDown</code> 的特殊处理方式，需要把数据处理成第三方组件库需要的样子
+        </p>
+        <code-view [codeValue]="dropDown" codeType="TypeScript" codeId="form-dropDown-code"></code-view>
+        <p class="normal-text">从上面的代码可以看到，这个处理方法主要做了些值的过滤、翻译、重组等功能，这块的翻译之所以还没启用，是因为整个系统并没有全部替换这个方法，目前的翻译是在 <code
+                class="stress-normal">DropDown</code>
+            组件内部做的，而那块做翻译是将当前的所有值又重新循环处理一遍，有点浪费时间了，之后会把翻译处理加在值的重组里面一并执行，以下是值的重组功能相关代码：
+        </p>
+        <code-view [codeValue]="handleOptions" codeType="TypeScript" codeId="form-handleOptions-code"></code-view>
+
+        <!-- 旧代码问题所在 -->
+        <p class="title-2" id="form-service-badCode">旧代码问题所在</p>
+        <ul class="normal-ul">
+            <li>代码过于繁杂冗余，有很多没有必要且重复的处理。</li>
+            <li>
+                <code-view [codeValue]="badCode1" codeType="TypeScript" codeId="form-service-badCode1"></code-view>
+                <code-view [codeValue]="badCode2" codeType="TypeScript" codeId="form-service-badCode2"></code-view>
+            </li>
+            <li>语法不够精炼简洁，影响性能的同时可读性差,旧代码中用到了大量的 <code class="stress-normal">if else</code>
+                语句，随着功能的开发，之后大量的代码都是这样拼接上去的，越拼越长，越拼越乱</li>
+            <li>有部分完全不需要处理的字段，没有及时的跳出方法</li>
+            <li>整个系统中，存在多处类似的表单数据处理方法，没有进行统一的管理</li>
+        </ul>
+
+        <!-- 注意事项 -->
+        <p class="title-2" id="form-service-attention">注意事项</p>
+        <ul class="normal-ul">
+            <li>目前新的 <code class="stress-normal">FormService</code> 并没有全局注入，如果需要使用请在组件中加入 <code
+                    class="stress-normal">providers</code> ，详情请看最上方如何使用</li>
+            <li>旧方法之所以混乱，主要原因是因为由不同的人修改，所以在使用新方法碰到需要修改代码的时候，请联系相关负责人</li>
+        </ul>
+
+        <p class="title-2" id="form-service-feature">未来计划</p>
+        <ul class="normal-ul">
+            <li>继续优化新 FormService 的相关子方法</li>
+            <li>提高方法兼容性，继续适配更多的页面</li>
+            <li>处理非常非常大的数据时，依然有点慢，后期打算接入
+                <a routerLink="../worker">webWorker
+                    <i nz-icon nzType="aim" nzTheme="outline"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <app-anchor [linkList]="linkList"></app-anchor>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+/**
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/LICENSE
+ */
+import { Platform } from '@angular/cdk/platform';
+import { ChangeDetectorRef, ElementRef, EventEmitter, OnChanges } from '@angular/core';
+import { NzConfigKey, NzConfigService } from 'ng-zorro-antd/core/config';
+import { NgClassInterface, NgStyleInterface, NumberInput, NzShapeSCType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
+import * as ɵngcc0 from '@angular/core';
+export declare class NzAvatarComponent implements OnChanges {
+    nzConfigService: NzConfigService;
+    private elementRef;
+    private cdr;
+    private platform;
+    static ngAcceptInputType_nzGap: NumberInput;
+    readonly _nzModuleName: NzConfigKey;
+    nzShape: NzShapeSCType;
+    nzSize: NzSizeLDSType | number;
+    nzGap: number;
+    nzText?: string;
+    nzSrc?: string;
+    nzSrcSet?: string;
+    nzAlt?: string;
+    nzIcon?: string;
+    readonly nzError: EventEmitter<Event>;
+    hasText: boolean;
+    hasSrc: boolean;
+    hasIcon: boolean;
+    textStyles: NgStyleInterface;
+    classMap: NgClassInterface;
+    customSize: string | null;
+    textEl?: ElementRef;
+    private el;
+    constructor(nzConfigService: NzConfigService, elementRef: ElementRef, cdr: ChangeDetectorRef, platform: Platform);
+    imgError($event: Event): void;
+    ngOnChanges(): void;
+    private calcStringSize;
+    private notifyCalc;
+    private setSizeStyle;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<NzAvatarComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<NzAvatarComponent, "nz-avatar", ["nzAvatar"], { "nzShape": "nzShape"; "nzSize": "nzSize"; "nzGap": "nzGap"; "nzText": "nzText"; "nzSrc": "nzSrc"; "nzSrcSet": "nzSrcSet"; "nzAlt": "nzAlt"; "nzIcon": "nzIcon"; }, { "nzError": "nzError"; }, never, never>;
+}
+
+//# sourceMappingURL=avatar.component.d.ts.map
