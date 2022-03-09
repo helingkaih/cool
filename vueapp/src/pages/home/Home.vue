@@ -7,7 +7,7 @@
             <el-icon :size="40" style="padding: 20px">
               <avatar />
             </el-icon>
-            <div style="width: 80%; padding: 5px 0px">
+            <div v-if="userInfo" style="width: 80%; padding: 5px 0px">
               <p
                 style="
                   margin: 12px 0px;
@@ -16,9 +16,32 @@
                   color: #3c4a54;
                 "
               >
-                呜啦啦啦啦啦
+                {{ userInfo.nickname || userInfo.account }}
               </p>
-              <p style="font-size: 14px; color: #808695">呜啦啦啦啦啦</p>
+              <p style="font-size: 14px; color: #808695">
+                {{ userInfo.sex || "这人性别未知" }}
+              </p>
+            </div>
+            <div
+              v-if="!userInfo"
+              style="
+                width: 80%;
+                padding: 5px 0px;
+                align-items: center;
+                display: flex;
+              "
+            >
+              <p
+                style="
+                  font-size: 24px;
+                  font-weight: bold;
+                  color: #65659d;
+                  cursor: pointer;
+                "
+                @click="accountEdit"
+              >
+                登录/注册
+              </p>
             </div>
           </div>
         </el-card>
@@ -48,10 +71,10 @@
             版本说明
           </p>
           <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="datea" label="名称" width="180" />
-            <el-table-column prop="versiona" label="版本" width="180" />
-            <el-table-column prop="dateb" label="名称" width="180" />
-            <el-table-column prop="versionb" label="版本" width="180" />
+            <el-table-column prop="datea" label="名称" />
+            <el-table-column prop="versiona" label="版本" />
+            <el-table-column prop="dateb" label="名称" />
+            <el-table-column prop="versionb" label="版本" />
           </el-table>
         </el-card>
       </el-col>
@@ -74,8 +97,10 @@
 
 <script>
 import * as echarts from "echarts";
+import { useStore } from "vuex";
+import { computed } from "vue";
 import req from "@/request";
-import { onMounted, onUpdated, onUnmounted, getCurrentInstance } from "vue";
+import { onMounted } from "vue";
 export default {
   name: "Home",
   components: {},
@@ -104,6 +129,8 @@ export default {
     };
   },
   setup() {
+    const store = useStore(); // 获取store 实例
+    const userInfo = computed(() => store.state.userInfo);
     const TODAY_WORK = {
       title: {
         text: "今日任务",
@@ -184,10 +211,9 @@ export default {
       ],
     };
 
-    // const instance = getCurrentInstance();
     const WEATHER_URL =
       "https://www.tianqiapi.com/api?version=v9&appid=78954942&appsecret=Vp7KCOxw&city=%E8%A5%BF%E5%AE%89";
-    req(WEATHER_URL, {}, "GET").then((data) => {
+    req(WEATHER_URL, {}, "GET", true, true).then((data) => {
       let day = [],
         topTem = [],
         bottomTem = [],
@@ -278,6 +304,10 @@ export default {
       );
       weekWeatherChart.setOption(WEEK_WEATHER);
     });
+
+    const accountEdit = () => {
+      store.dispatch("changeAccount", true);
+    };
     onMounted(() => {
       {
         // 基于准备好的dom，初始化echarts实例
@@ -286,9 +316,12 @@ export default {
         // 绘制图表
         dayChart.setOption(TODAY_WORK);
         weekChart.setOption(WEEK_WORK);
-        return {};
       }
     });
+    return {
+      userInfo,
+      accountEdit,
+    };
   },
 };
 </script>

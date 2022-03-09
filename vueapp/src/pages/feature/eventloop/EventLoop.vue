@@ -36,8 +36,8 @@
       <p class="title-2" id="CycleProcess">循环过程</p>
       <el-image
         key="CycleProcess"
-        :src="require('../../../assets/eventloop/base.png')"
-        :preview-src-list="[require('../../../assets/eventloop/base.png')]"
+        :src="require('@/assets/eventloop/base.png')"
+        :preview-src-list="[require('@/assets/eventloop/base.png')]"
       ></el-image>
       <ul class="normal-ul">
         <li>主线程按顺序执行所有代码</li>
@@ -50,15 +50,12 @@
       <p class="text-normal">
         网上还有种说法，将所有同步任务和非微任务算作宏任务。宏任务和微任务是相对而言的，根据代码执时循环的先后，将代码执行分层理解，在每一层（一次）的事件循环中，首先整体代码块看作一个宏任务，宏任务中的
         Promise（then、catch、finally）、MutationObserver、Process.nextTick
-        就是该宏任务层的微任务；宏任务中的同步代码进入主线程中立即执行的，宏任务中的非微任务异步执行代码将作为下一次循环的宏任务时进入调用栈等待执行的；此时，调用栈中等待执行的队列分为两种，优先级较高先执行的本层循环微任务队列，和优先级低的下层循环执行的宏任务队列。(
-        转载自 https://blog.csdn.net/qq_31967985/article/details/110310685 )
+        就是该宏任务层的微任务；宏任务中的同步代码进入主线程中立即执行的，宏任务中的非微任务异步执行代码将作为下一次循环的宏任务时进入调用栈等待执行的；此时，调用栈中等待执行的队列分为两种，优先级较高先执行的本层循环微任务队列，和优先级低的下层循环执行的宏任务队列。
       </p>
       <el-image
         key="CycleProcessgif"
-        :src="require('../../../assets/eventloop/CycleProcess.gif')"
-        :preview-src-list="[
-          require('../../../assets/eventloop/CycleProcess.gif'),
-        ]"
+        :src="require('@/assets/eventloop/CycleProcess.gif')"
+        :preview-src-list="[require('@/assets/eventloop/CycleProcess.gif')]"
       ></el-image>
       <p class="text-normal">
         总结一下我的理解，执行顺序
@@ -77,7 +74,7 @@
 </template>
 
 <script>
-import anchor from "../../../components/anchor";
+import anchor from "@/components/anchor";
 export default {
   name: "EventLoop",
   components: { anchor: anchor },

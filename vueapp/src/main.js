@@ -2,13 +2,17 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './route';
 import ElementPlus from 'element-plus';
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import './public-path';
 import 'element-plus/dist/index.css';
 import './assets/global.scss';
-import * as icons from '@element-plus/icons';
+import * as icons from '@element-plus/icons-vue';
 import 'highlight.js/styles/vs2015.css'
 import * as directive from './directive';
 import store from './store/shared';
+import { globalCookiesConfig } from "vue3-cookies";
+import VueCookies from 'vue3-cookies';
+
 let vue = createApp(App);
 
 // 导入 icon 
@@ -22,7 +26,9 @@ for (let item in directive.default) {
 
 function render(props) {
   const { container } = props;
-  vue.use(router).use(ElementPlus).use(store).mount(container ? container.querySelector("#app") : '#app');
+  vue.use(router).use(ElementPlus, {
+    locale: zhCn,
+  }).use(store).use(VueCookies).mount(container ? container.querySelector("#app") : '#app');
   // 这里是挂载到自己的html中  基座会拿到这个挂载后的html 将其插入进去
 }
 

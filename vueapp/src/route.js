@@ -12,7 +12,8 @@ const routes = [
         path: '/home',
         component: layout,
         children: [
-            { path: 'dashboard', component: () => import('@/pages/home/Home') }
+            { path: 'dashboard', component: () => import('@/pages/home/Home') },
+            { path: 'workbench', component: () => import('@/pages/home/Workbench') }
         ]
     },
 
@@ -42,6 +43,10 @@ const routes = [
             {
                 path: 'computed',
                 component: () => import('@/pages/note/vue3/computed/Computed'),
+            },
+            {
+                path: 'reactivity',
+                component: () => import('@/pages/note/vue3/reactivity/Reactivity'),
             },
             {
                 path: 'jsprinciple',

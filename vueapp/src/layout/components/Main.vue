@@ -7,13 +7,15 @@
         </keep-alive>
       </transition>
     </router-view>
+    <Account></Account>
   </div>
 </template>
 
 <script>
+import Account from "./Account.vue";
 export default {
   name: "VaMain",
-  components: {},
+  components: { Account },
   computed: {
     key() {
       console.log(this.$route.path);

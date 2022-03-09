@@ -62,6 +62,7 @@
 
 <script>
 import { reactive, ref } from "vue";
+import req from "@/request";
 export default {
   name: "baseForm",
   components: {},
@@ -88,7 +89,6 @@ export default {
 
     const onSubmit = () => {
       console.log("提交了");
-      console.log("form", form);
     };
 
     const onChange = () => {

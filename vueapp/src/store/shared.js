@@ -15,7 +15,10 @@ const store = createStore({
                     name: "主页",
                     icon: "HomeFilled",
                     path: "/home",
-                    menu: [{ name: "主页", path: "/dashboard", icon: "el-icon-s-home" }],
+                    menu: [
+                        { name: "主页", path: "/dashboard", icon: "el-icon-s-home" },
+                        { name: "工作台", path: "/workbench", icon: "el-icon-s-order" },
+                    ],
                 },
                 {
                     label: "assembly",
@@ -74,6 +77,10 @@ const store = createStore({
                     ]
                 },
             ],
+            // 用户信息
+            userInfo: null,
+            // 是否编辑账号
+            accountEdit: false
         }
     },
     // getters: {
@@ -81,7 +88,6 @@ const store = createStore({
     //     currentTab: (state) => state.currentTab,
     // },
     mutations: {
-
         addTabList(state, tab) {
             if (state.tabList.findIndex((item) => { return item.name === tab.name }) === -1) {
                 state.tabList.push(tab);
@@ -94,6 +100,12 @@ const store = createStore({
                 state.currentTab = state.tabList[index - 1]
             };
             state.tabList.splice(index, 1);
+        },
+        changeAccount(state, isEdit) {
+            state.accountEdit = isEdit;
+        },
+        changeUserInfo(state, info) {
+            state.userInfo = info;
         }
 
     },
@@ -104,6 +116,12 @@ const store = createStore({
         deleteTabList({ commit }, tab) {
             commit('deleteTabList', tab)
         },
+        changeAccount({ commit }, isEdit) {
+            commit('changeAccount', isEdit)
+        },
+        changeUserInfo({ commit }, info) {
+            commit('changeUserInfo', info)
+        }
     }
 })
 

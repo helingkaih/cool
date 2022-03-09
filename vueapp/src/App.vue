@@ -6,7 +6,10 @@
 
 <script>
 import Layout from "./layout";
+import { useCookies } from "vue3-cookies";
+import { Base64 } from "js-base64";
 import { useStore } from "vuex";
+import req from "@/request";
 export default {
   name: "App",
   components: {
@@ -40,7 +43,20 @@ export default {
       }
     },
   },
-  setup() {},
+  setup() {
+    const store = useStore(); // 获取store 实例
+    // 检测 cookie 中是否有已经登录过的信息，有的话直接使用
+    const cookies = useCookies().cookies;
+    const cookieInfo = cookies.get("userInfo");
+    if (cookieInfo) {
+      const param = JSON.parse(Base64.decode(cookieInfo));
+      req("checkUser", param, "POST").then((data) => {
+        if (data.code === 1) {
+          store.dispatch("changeUserInfo", param);
+        }
+      });
+    }
+  },
 };
 </script>
 

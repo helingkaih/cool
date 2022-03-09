@@ -16,21 +16,29 @@
         </el-breadcrumb>
       </div>
       <div class="head-top-right">
-        <el-icon>
-          <search />
-        </el-icon>
-        <el-icon>
-          <bell />
-        </el-icon>
-        <el-icon>
-          <full-screen />
-        </el-icon>
-        <el-icon>
-          <setting />
-        </el-icon>
-        <el-icon>
-          <refresh />
-        </el-icon>
+        <el-dropdown>
+          <el-icon :size="20"><user /></el-icon>
+          <template #dropdown>
+            <el-dropdown-menu v-if="userInfo">
+              <el-dropdown-item>
+                账号：{{ userInfo.account }}
+              </el-dropdown-item>
+              <el-dropdown-item>
+                昵称：{{ userInfo.nickname || "" }}
+              </el-dropdown-item>
+              <el-dropdown-item
+                >生日：{{ userInfo.birth || "" }}
+              </el-dropdown-item>
+              <el-dropdown-item
+                >性别：{{ userInfo.sex || "" }}
+              </el-dropdown-item>
+              <el-dropdown-item divided @click="out">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+            <el-dropdown-menu v-if="!userInfo">
+              <el-dropdown-item @click="login">登录/注册</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </div>
     </div>
     <div class="head-bottom">
@@ -58,13 +66,16 @@
 import { useStore } from "vuex";
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
+import { useCookies } from "vue3-cookies";
 export default {
   name: "VaHead",
   setup() {
     const store = useStore(); // 获取store 实例
     const router = useRouter();
+    const cookies = useCookies().cookies;
     const tabList = computed(() => store.state.tabList);
     const currentTab = computed(() => store.state.currentTab);
+    const userInfo = computed(() => store.state.userInfo);
     const clickTab = (event) => {
       for (let item of tabList.value) {
         if (item.name === event.props.name) {
@@ -88,11 +99,29 @@ export default {
       store.dispatch("deleteTabList", { name });
     };
 
+    /**
+     * 退出登录
+     */
+    const out = () => {
+      cookies.remove("userInfo");
+      store.dispatch("changeUserInfo", null);
+    };
+
+    /**
+     * 登录/注册
+     */
+    const login = () => {
+      store.dispatch("changeAccount", true);
+    };
+
     return {
       tabList,
       currentTab,
+      userInfo,
       removeTab,
       clickTab,
+      out,
+      login,
     };
   },
 };
@@ -115,8 +144,7 @@ export default {
       display: flex;
       align-items: center;
       i {
-        font-size: 16px;
-        margin-left: 30px;
+        margin: 0px 15px;
       }
     }
   }

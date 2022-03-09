@@ -62,6 +62,13 @@ export default {
       this.$router.push({ path: item });
     },
   },
+  mounted() {
+    // 解决子子应用中刷新浏览器 还显示 头部导航栏的问题
+    const childRoute = location.pathname.split("/");
+    if (["vue", "react", "angular"].indexOf(childRoute[1]) !== -1) {
+      this.main = false;
+    }
+  },
 };
 </script>
 <style lang="scss" scoped>
